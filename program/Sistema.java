@@ -19,7 +19,6 @@ public class Sistema {
 	public void executarComando(String strComando, Parametros parametros) {
 		Comando comando = comandos.get(strComando);
 		comando.executar(parametros);
-		System.err.println("erro");
 	}
 	
 
