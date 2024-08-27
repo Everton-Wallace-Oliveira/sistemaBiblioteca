@@ -20,5 +20,4 @@ public class Sistema {
 		Comando comando = comandos.get(strComando);
 		comando.executar(parametros);
 	}
-	
 }
