@@ -3,7 +3,7 @@ import book.Livro;
 import repository.Repositorio;
 import user.Usuario;
 
-public class EmprestarComando implements Comando {
+public class ComandoEmprestimo implements Comando {
 
 	@Override
 	public void executar(Parametros parametros) {

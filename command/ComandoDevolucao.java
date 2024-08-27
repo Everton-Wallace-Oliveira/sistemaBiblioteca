@@ -1,6 +1,6 @@
 package command;
 
-public class DevolverComando implements Comando {
+public class ComandoDevolucao implements Comando {
 
 	@Override
 	public void executar(Parametros parametros) {

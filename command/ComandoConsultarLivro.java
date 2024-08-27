@@ -2,7 +2,7 @@ package command;
 import book.Livro;
 import repository.Repositorio;
 
-public class ConsultarLivroComando implements Comando {
+public class ComandoConsultarLivro implements Comando {
 
 	@Override
 	public void executar(Parametros parametros) {
