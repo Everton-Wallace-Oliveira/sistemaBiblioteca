@@ -88,7 +88,14 @@ public class Repositorio {
 		livro5.adicionarExemplar(exemplar7);
 		livro7.adicionarExemplar(exemplar8);
 		livro7.adicionarExemplar(exemplar9);
+		
+		this.adicionarLivro(livro1);
+		this.adicionarLivro(livro2);
+		this.adicionarLivro(livro3);
+		this.adicionarLivro(livro4);
+		this.adicionarLivro(livro5);
+		this.adicionarLivro(livro6);
+		this.adicionarLivro(livro7);
+		this.adicionarLivro(livro8);
 	}
-	
-
 }
