@@ -18,10 +18,20 @@ public class RegraEmprestimoAluno extends RegraEmprestimo {
 	@Override
 	public boolean haExemplarDisponivel(Usuario usuario, Livro livro) {
 		
-		if ((livro.getQtdExemplaresDisponiveis() > 0) && (
-			 (livro.getQtdReservasFeitas() < livro.getQtdExemplaresDisponiveis()) ||
-			 (livro.haReservaFeita(usuario)))) {
+		if (livro.getQtdExemplaresDisponiveis() > 0) {
+			
+			if (livro.getQtdReservasFeitas() >= livro.getQtdExemplaresDisponiveis()) {
+				if (livro.haReservaFeita(usuario)) {
+					
 					return true;
+				}
+				
+				System.out.println("Motivo: há exemplares disponíveis apenas para quem fez reserva.");
+				
+				return false;
+			}
+			
+			return true;
 		}
 		
 		System.out.println("Motivo: não há exemplares disponíveis para empréstimo");
