@@ -1,5 +1,8 @@
 package user;
 import java.util.List;
+
+import loanRule.RegraEmprestimo;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
