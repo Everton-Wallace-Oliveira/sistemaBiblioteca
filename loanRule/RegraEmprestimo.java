@@ -1,7 +1,8 @@
-package user;
+package loanRule;
 import java.util.Calendar;
 import java.util.List;
-import book.*;
+import book.Livro;
+import user.Usuario;
 
 public abstract class RegraEmprestimo {
 	
