@@ -1,6 +1,6 @@
-package user;
-
+package loanRule;
 import book.Livro;
+import user.Usuario;
 
 public class RegraEmprestimoProfessor extends RegraEmprestimo {
 	private static RegraEmprestimoProfessor minhaInstancia;
