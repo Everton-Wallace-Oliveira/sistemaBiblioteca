@@ -1,5 +1,8 @@
 package user;
 
+import loanRule.RegraEmprestimo;
+import loanRule.RegraEmprestimoAluno;
+
 public class AlunoGraduacao extends Usuario implements Aluno {
 	private static int maxLivrosEmprestimo = 3;
 	private static int limiteDiasEmprestimo = 3;
