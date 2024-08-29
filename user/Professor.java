@@ -1,5 +1,8 @@
 package user;
 
+import loanRule.RegraEmprestimo;
+import loanRule.RegraEmprestimoProfessor;
+
 public class Professor extends Usuario implements Observador {
 	private int qtdNotificacoes;
 	private static int limiteDiasEmprestimo = 7;
