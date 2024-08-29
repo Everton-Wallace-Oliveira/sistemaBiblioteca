@@ -1,5 +1,7 @@
-package user;
-import book.*;
+package loanRule;
+import book.Livro;
+import user.Aluno;
+import user.Usuario;
 
 public class RegraEmprestimoAluno extends RegraEmprestimo {
 	private static RegraEmprestimoAluno minhaInstancia;
@@ -13,7 +15,7 @@ public class RegraEmprestimoAluno extends RegraEmprestimo {
 			minhaInstancia = new RegraEmprestimoAluno();
 		
 		return minhaInstancia;
-	} 
+	}
 
 	@Override
 	public boolean haExemplarDisponivel(Usuario usuario, Livro livro) {
