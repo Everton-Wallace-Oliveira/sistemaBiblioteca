@@ -37,7 +37,7 @@ public abstract class Usuario {
 	
 	public boolean usuarioEmDebito() {
 		for (Emprestimo emprestimo: this.emprestimosCorrentes) {
-			if (empestimo.estaEmAtraso())
+			if (emprestimo.estaEmAtraso())
 				System.out.println("Motivo: o(a) usuário(a) está com livros em débito.");
 				return true;
 		}
