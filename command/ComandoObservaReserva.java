@@ -1,35 +1,30 @@
 package command;
 
-import java.util.List;
-
 import book.Livro;
-import loan.Reserva;
 import repository.Repositorio;
+import user.Observador;
+import user.Usuario;
 
 public class ComandoObservaReserva implements Comando {
 
     @Override
     public void executar(Parametros parametros) {
-        String codigoLivro = parametros.getCodigoDois();
-        Repositorio repositorio = Repositorio.getInstancia();
-        Livro livro = repositorio.buscaLivroPorCodigo(codigoLivro);
+    	  String codigoUsuario = parametros.getCodigoUm();
+          String codigoLivro = parametros.getCodigoDois();
+          Repositorio repositorio = Repositorio.getInstancia();
+          Usuario usuario = repositorio.buscaUsuarioPorCodigo(codigoUsuario);
+          Livro livro = repositorio.buscaLivroPorCodigo(codigoLivro);
 
-        if (livro == null) {
-            System.out.println("Livro não encontrado.");
-            return;
-        }
-
-        List<Reserva> reservas = livro.getReservas();
-
-        if (reservas == null || reservas.isEmpty()) {
-            System.out.println("Nenhuma reserva encontrada para o livro: " + livro.getTitulo());
-            return;
-        }
-
-        System.out.println("Reservas para o livro: " + livro.getTitulo());
-        for (Reserva reserva : reservas) {
-            System.out.println("Reserva feita por: " + reserva.getUsuario().getNome() + 
-                               ", Data da reserva: " + reserva.getDataReserva());
-        }
+          if (usuario == null) {
+              System.out.println("Usuário não encontrado.");
+              return;
+          }
+          if (livro == null) {
+              System.out.println("Livro não encontrado.");
+              return;
+          }         
+          livro.adicionaObservador((Observador) usuario);
+          System.out.println("Observador adicionado com sucesso para o usuário: " + usuario.getNome() + " e o livro: " + livro.getTitulo());
+  
     }
 }

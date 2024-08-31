@@ -9,7 +9,6 @@ import loanRule.RegraEmprestimo;
 public abstract class Usuario {
 	private String nome;
 	private String codigoIdentificacao;
-	private RegraEmprestimo regraEmprestimo;
 	private List<Emprestimo> emprestimosCorrentes;
 	private List<Emprestimo> emprestimosPassados;
 	private List<Reserva> reservas;

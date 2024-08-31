@@ -3,7 +3,7 @@ package loan;
 import java.util.Calendar;
 
 import book.Exemplar;
-import data.CalculaData;
+import date.CalculaData;
 import user.Usuario;
 
 public class Emprestimo extends CalculaData {
@@ -25,15 +25,19 @@ public class Emprestimo extends CalculaData {
 		boolean emAtraso = this.dataDevolucao.after(dataAtual);
 		return emAtraso;
 	}
-
-	public String exibeInformacoes() {
-		return "Emprestimo [usuario=" + usuario + ", exemplar=" + exemplar + ", dataEmprestimo=" + dataEmprestimo
-				+ ", dataDevolucao=" + dataDevolucao + "]";
-	}
-
+	
 	public Calendar getDataEmprestimo() {
 		return dataEmprestimo;
 	}
+	
+	public Exemplar getExemplar() {
+		return exemplar;
+	}
+	
+	public void desfazerEmprestimo() {
+        usuario.removeEmprestimo(this);
+        exemplar.devolverExemplar();
+    }
 
 	public Calendar getDataDevolucao() {
 		return dataDevolucao;
@@ -53,4 +57,5 @@ public class Emprestimo extends CalculaData {
 		return ehValido;
 	}
 
+	
 }
