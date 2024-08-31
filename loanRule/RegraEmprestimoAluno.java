@@ -23,7 +23,7 @@ public class RegraEmprestimoAluno extends RegraEmprestimo {
 		if (livro.getQtdExemplaresDisponiveis() > 0) {
 			
 			if (livro.getQtdReservasFeitas() >= livro.getQtdExemplaresDisponiveis()) {
-				if (livro.haReservaFeita(usuario)) {
+				if (livro.buscaReservaDeUsuario(usuario)!= null) {
 					
 					return true;
 				}
