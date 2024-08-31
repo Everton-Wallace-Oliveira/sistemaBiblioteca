@@ -3,8 +3,13 @@ package repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import user.*;
-import book.*;
+
+import book.Exemplar;
+import book.Livro;
+import user.AlunoGraduacao;
+import user.AlunoPosGraduacao;
+import user.Professor;
+import user.Usuario;
 
 public class Repositorio {
 	private List<Usuario> usuarios;
@@ -69,15 +74,15 @@ public class Repositorio {
         Livro livro7 = new Livro("400", "Design Patterns: Elements of Reusable Object-Oriented Software", "Addison-Wesley Professional", new ArrayList<>(Arrays.asList("Erich Gamma", "Richard Helm", "Ralph Johnson", "John Vlissides")), 1, 1994);
         Livro livro8 = new Livro("401", "UML Distilled: A Brief Guide to the Standard Object Modeling Language", "Addison-Wesley Professional", new ArrayList<>(Arrays.asList("Martin Fowler")), 3, 2003);
 	
-		Exemplar exemplar1 = new Exemplar(livro1, "01");
-		Exemplar exemplar2 = new Exemplar(livro1, "02");
-		Exemplar exemplar3 = new Exemplar(livro2, "03");
-		Exemplar exemplar4 = new Exemplar(livro3, "04");
-		Exemplar exemplar5 = new Exemplar(livro4, "05");
-		Exemplar exemplar6 = new Exemplar(livro5, "06");
-		Exemplar exemplar7 = new Exemplar(livro5, "07");
-		Exemplar exemplar8 = new Exemplar(livro7, "08");
-		Exemplar exemplar9 = new Exemplar(livro7, "09");
+		Exemplar exemplar1 = new Exemplar("01", livro1);
+		Exemplar exemplar2 = new Exemplar("02", livro1);
+		Exemplar exemplar3 = new Exemplar("03", livro2);
+		Exemplar exemplar4 = new Exemplar("04", livro3);
+		Exemplar exemplar5 = new Exemplar("05", livro4);
+		Exemplar exemplar6 = new Exemplar("06", livro5);
+		Exemplar exemplar7 = new Exemplar("07", livro5);
+		Exemplar exemplar8 = new Exemplar("08", livro7);
+		Exemplar exemplar9 = new Exemplar("09", livro7);
 		
 		livro1.adicionarExemplar(exemplar1);
 		livro1.adicionarExemplar(exemplar2);
