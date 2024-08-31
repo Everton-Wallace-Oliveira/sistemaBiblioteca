@@ -8,7 +8,7 @@ public class ComandoConsultarLivro implements Comando {
 	public void executar(Parametros parametros) {
 		String codigoLivro = parametros.getCodigoUm();
 		Repositorio repositorio = Repositorio.getInstancia();
-		Livro livro = repositorio.buscarLivroPorCodigo(codigoLivro);
+		Livro livro = repositorio.buscaLivroPorCodigo(codigoLivro);
 		
 	}
 
