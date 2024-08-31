@@ -40,8 +40,6 @@ public class ComandoEmprestimo implements Comando {
              usuario.adicionarEmprestimo(emprestimo);
              System.out.println("Empréstimo realizado com sucesso para o usuário: " + usuario.getNome() + " com o livro: " + livro.getTitulo());
         }
-        
-        
        
     }
 }
