@@ -19,13 +19,12 @@ public class Exemplar {
 	public void devolverExemplar() {
 		this.emprestado = false;
 	}
-	
-	public void exibeInformacoes() {
-		System.out.println("Exemplar [codigoExemplar=" + codigoExemplar + ", livroBase=" + livroBase.exibeInformacoes() + "]");
-	}
-
 	public boolean isEmprestado() {
 		return emprestado;
+	}
+
+	public String getCodigoExemplar() {
+		return codigoExemplar;
 	}
 	
 }
