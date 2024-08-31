@@ -1,10 +1,10 @@
 package user;
+import java.util.ArrayList;
 import java.util.List;
 
+import loan.Emprestimo;
+import loan.Reserva;
 import loanRule.RegraEmprestimo;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 
 public abstract class Usuario {
 	private String nome;
@@ -37,7 +37,7 @@ public abstract class Usuario {
 	
 	public boolean usuarioEmDebito() {
 		for (Emprestimo emprestimo: this.emprestimosCorrentes) {
-			if (empestimo.estaEmAtraso())
+			if (emprestimo.estaEmAtraso())
 				System.out.println("Motivo: o(a) usuário(a) está com livros em débito.");
 				return true;
 		}

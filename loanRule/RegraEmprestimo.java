@@ -1,6 +1,5 @@
 package loanRule;
-import java.util.Calendar;
-import java.util.List;
+
 import book.Livro;
 import user.Usuario;
 
@@ -20,6 +19,12 @@ public abstract class RegraEmprestimo {
 	}
 	
 	public boolean haEmprestimoEmCurso(Usuario usuario, Livro livro) {
-		return livro.haEmprestimoEmCurso(usuario);
+		if (livro.buscaEmprestimoDeUsuario(usuario)!= null) {
+			
+			return true;
+		}else {
+			return false;
+		}
+	
 	}
 }
