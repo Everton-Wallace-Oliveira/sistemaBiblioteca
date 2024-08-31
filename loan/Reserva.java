@@ -3,7 +3,7 @@ package loan;
 import java.util.Calendar;
 
 import book.Livro;
-import data.CalculaData;
+import date.CalculaData;
 import user.Usuario;
 
 public class Reserva extends CalculaData{
@@ -23,18 +23,12 @@ public class Reserva extends CalculaData{
 		return dataReserva;
 	}
 	
-
-	public void exibeInformacoes() {
-		System.out.println("Reserva [usuario=" + usuario.getNome() + ", livroBase=" + livroBase.getTitulo() + ", dataReserva=" + dataReserva + "]"); 
-	}
+	public void desfazerReserva() {
+        usuario.removeReserva(this);
+    }
 	
 	 public Usuario getUsuario() {
 	        return usuario;
 	    }
-
-	@Override
-	public String toString() {
-		return "Reserva [usuario=" + usuario + ", livroBase=" + livroBase + ", dataReserva=" + dataReserva + "]";
-	}
 
 }

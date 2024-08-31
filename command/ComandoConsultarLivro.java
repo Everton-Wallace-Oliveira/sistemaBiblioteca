@@ -9,7 +9,7 @@ public class ComandoConsultarLivro implements Comando {
 		String codigoLivro = parametros.getCodigoUm();
 		Repositorio repositorio = Repositorio.getInstancia();
 		Livro livro = repositorio.buscaLivroPorCodigo(codigoLivro);
-		
+		livro.exibeInformacoes();
 	}
 
 }

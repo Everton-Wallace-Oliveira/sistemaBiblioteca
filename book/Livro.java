@@ -1,7 +1,6 @@
 package book;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import loan.Emprestimo;
@@ -37,7 +36,12 @@ public class Livro implements Assunto{
 
 	
 	public void adicionaReserva(Usuario usuario) {
-        reservas.add(new Reserva(usuario, this)); 
+		Reserva reserva = new Reserva(usuario, this);
+		usuario.adicionarReserva(reserva);
+	    reservas.add(reserva); 
+		if(reservas.size() >  2) {
+			this.notifica();
+		}
     }
     
     public void adicionaEmprestimo(Usuario usuario) {
@@ -45,17 +49,10 @@ public class Livro implements Assunto{
         if (exemplar != null) {
             Emprestimo emprestimo = new Emprestimo(usuario, exemplar);
             emprestimos.add(emprestimo);
+            exemplar.obterExemplar();
         }
     }
-//    
-//    public void adicionaEmprestimo(Emprestimo emprestimo) {
-//        if (emprestimos == null) {
-//            emprestimos = new ArrayList<>();
-//        }
-//        emprestimos.add(emprestimo);
-//    }
-//    
-    private Exemplar obterExemplarDisponivel() {
+    public Exemplar obterExemplarDisponivel() {
         for (Exemplar exemplar : exemplares) {
             if (!exemplar.isEmprestado()) { 
                 return exemplar;
@@ -63,32 +60,28 @@ public class Livro implements Assunto{
         }
         return null;
     }
-
+    
     public void removeReserva(Usuario usuario) {
-        Iterator<Reserva> iterator = reservas.iterator();
-
-        while (iterator.hasNext()) {
-            Reserva reserva = iterator.next();
-            if (reserva.getUsuario().equals(usuario)) {
-                iterator.remove(); 
-                System.out.println("Reserva removida para o usuário: " + usuario.getNome());
-                return;
-            }
-        }
-        System.out.println("Nenhuma reserva encontrada para o usuário: " + usuario.getNome());
+    	Reserva reservaParaRemover = buscaReservaDeUsuario(usuario);
+        if(reservaParaRemover != null) {
+        	reservaParaRemover.desfazerReserva();
+        	reservas.remove(reservaParaRemover);
+            System.out.println("Reserva removida para o usuário: " + usuario.getNome());
+        }else {
+            System.out.println("Nenhuma reserva encontrada para o usuário: " + usuario.getNome());
+        }          
     }
-
+    
     public void removeEmprestimo(Usuario usuario) {
-        Iterator<Emprestimo> iterator = emprestimos.iterator();
-        while (iterator.hasNext()) {
-            Emprestimo emprestimo = iterator.next();
-            if (emprestimo.getUsuario().equals(usuario)) {
-                iterator.remove();
-                System.out.println("Empréstimo removido para o usuário: " + usuario.getNome());
-                return; 
-            }
-        }
-        System.out.println("Nenhum empréstimo encontrado para o usuário: " + usuario.getNome());
+        Emprestimo emprestimoParaRemover = buscaEmprestimoDeUsuario(usuario);
+        if(emprestimoParaRemover != null) {
+        	emprestimoParaRemover.desfazerEmprestimo();
+        	emprestimos.remove(emprestimoParaRemover);
+            System.out.println("Empréstimo removido para o usuário: " + usuario.getNome());
+
+        }else {
+            System.out.println("Nenhum empréstimo encontrado para o usuário: " + usuario.getNome());
+        }          
     }
 
     public Reserva buscaReservaDeUsuario(Usuario usuario) {
@@ -139,22 +132,50 @@ public class Livro implements Assunto{
         observadores.remove(observador);
     }
     
-	public String exibeInformacoes() {
-		return "Livro [codigoLivro=" + codigoLivro + ", titulo=" + titulo + ", editora=" + editora + ", autores="
-				+ autores + ", edicao=" + edicao + ", anoPublicacao=" + anoPublicacao + ", exemplaresDisponiveis="
-				+ exemplares + ", exemplaresEmprestados=" + emprestimos + ", reservas=" + reservas
-				+ "]";
-	}
+    public void exibeInformacoes() {
+        System.out.printf("Título do livro: %s\n", this.titulo);
 
+        int qtdReservas = this.reservas.size();
+        System.out.printf("Quantidade de reservas: %d\n", qtdReservas);
 
-	public List<Reserva> getReservas() {
-		return reservas;
-	}
+        if (qtdReservas > 0) {
+            System.out.println("Usuários que fizeram reserva:");
+            for (Reserva reserva : this.reservas) {
+                System.out.println("- " + reserva.getUsuario().getNome());
+            }
+        }
+
+        System.out.println("Exemplares:");
+        for (Exemplar exemplar : this.exemplares) {
+            System.out.printf("Código do exemplar: %s\n", exemplar.getCodigoExemplar());
+            if (exemplar.isEmprestado()) {
+                System.out.println("Status: Emprestado");
+                
+                Emprestimo emprestimo = buscaEmprestimoPorExemplar(exemplar);
+                System.out.printf("Nome do usuário que realizou o empréstimo: %s\n", emprestimo.getUsuario().getNome());
+                System.out.printf("Data de empréstimo: %s\n", emprestimo.getDataEmprestimo().toString());
+                System.out.printf("Data prevista de devolução: %s\n", emprestimo.getDataDevolucao().toString());
+            } else {
+                System.out.println("Status: Disponível");
+            }
+            System.out.println();
+        }
+    } 
+    private Emprestimo buscaEmprestimoPorExemplar(Exemplar exemplar) {
+    	for(Emprestimo emprestimo: this.emprestimos) {
+    		if(emprestimo.getExemplar().equals(exemplar)) {
+    			return emprestimo;
+    		}
+    	}
+    	return null;
+    }
+
 
 	@Override
 	public void notifica() {
-		
-		
+		for (Observador observador: observadores) {
+			observador.atualiza();
+		}
 	}
 
 	
