@@ -29,14 +29,14 @@ public class LeitorDeComados {
 		entrada = entrada.strip();
 		
 		String[] codigos = entrada.split(" ", 0);
-		Parametros parametros;
+		Parametros parametros = null;
 		
 		switch (codigos.length) {
 			case 1:
 				parametros = new Parametros(codigos[0]);
 				break;
 			case 2:
-				parametros = new Parametros(codigos[0], codigo[1]);
+				parametros = new Parametros(codigos[0], codigos[1]);
 				break;
 		}
 		
