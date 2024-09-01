@@ -1,3 +1,5 @@
+// Tudo OK
+
 package command;
 
 public class Parametros {
