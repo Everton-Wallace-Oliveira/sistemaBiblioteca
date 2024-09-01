@@ -15,16 +15,20 @@ public class ComandoDevolucao implements Comando {
 		Livro livro = repositorio.buscaLivroPorCodigo(codigoLivro);
 
 		if (usuario == null) {
-			System.out.println("Usuário não encontrado.");
+			System.out.println("FALHA: usuário não encontrado.");
 			return;
 		}
 		if (livro == null) {
-			System.out.println("Livro não encontrado.");
+			System.out.println("FALHA: livro não encontrado.");
 			return;
 		}
 
-		livro.removeEmprestimo(usuario);
-		System.out.println("Livro devolvido com sucesso!");
+		if (livro.removeEmprestimo(usuario)) {
+			System.out.printf("SUCESSO: devolução do livro %s concluída para o usuário %s.\n", livro.getTitulo(), usuario.getNome());
+			return;
+		}
+		
+		System.out.printf("FALHA: nenhum empréstimo do livro %s encontrado para o usuário %s.\n", livro.getTitulo(), usuario.getNome());
 
 	}
 }
