@@ -3,8 +3,6 @@ package repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import book.Exemplar;
 import book.Livro;
 import user.AlunoGraduacao;
 import user.AlunoPosGraduacao;
@@ -59,11 +57,15 @@ public class Repositorio {
 		Usuario usuario2 = new AlunoGraduacao("Pedro Paulo", "789");
 		Usuario usuario3 = new AlunoPosGraduacao("Luiz Fernando Rodrigues", "456");
 		Usuario usuario4 = new Professor("Carlos Lucena", "100");
+		Usuario usuario5 = new Professor("Maria Pereira", "200");
+		Usuario usuario6 = new AlunoPosGraduacao("Clara Fernandes", "300");
 		
 		this.adicionarUsuario(usuario1);
 		this.adicionarUsuario(usuario2);
 		this.adicionarUsuario(usuario3);
 		this.adicionarUsuario(usuario4);
+		this.adicionarUsuario(usuario5);
+		this.adicionarUsuario(usuario6);
 		
 		Livro livro1 = new Livro("100", "Engenharia de Software", "Addison-Wesley", new ArrayList<>(Arrays.asList("Ian Sommerville")), 6, 2000);
         Livro livro2 = new Livro("101", "UML - Guia do Usuário", "Campus", new ArrayList<>(Arrays.asList("Grady Booch", "James Rumbaugh", "Ivar Jacobson")), 7, 2000);
@@ -73,26 +75,18 @@ public class Repositorio {
         Livro livro6 = new Livro("301", "Software Metrics: A Rigorous and Practical Approach", "CRC Press", new ArrayList<>(Arrays.asList("Norman Fenton", "James Bieman")), 3, 2014);
         Livro livro7 = new Livro("400", "Design Patterns: Elements of Reusable Object-Oriented Software", "Addison-Wesley Professional", new ArrayList<>(Arrays.asList("Erich Gamma", "Richard Helm", "Ralph Johnson", "John Vlissides")), 1, 1994);
         Livro livro8 = new Livro("401", "UML Distilled: A Brief Guide to the Standard Object Modeling Language", "Addison-Wesley Professional", new ArrayList<>(Arrays.asList("Martin Fowler")), 3, 2003);
-	
-		Exemplar exemplar1 = new Exemplar("01", livro1);
-		Exemplar exemplar2 = new Exemplar("02", livro1);
-		Exemplar exemplar3 = new Exemplar("03", livro2);
-		Exemplar exemplar4 = new Exemplar("04", livro3);
-		Exemplar exemplar5 = new Exemplar("05", livro4);
-		Exemplar exemplar6 = new Exemplar("06", livro5);
-		Exemplar exemplar7 = new Exemplar("07", livro5);
-		Exemplar exemplar8 = new Exemplar("08", livro7);
-		Exemplar exemplar9 = new Exemplar("09", livro7);
+        
+        // responsabiliadde de criar é da classe livro
 		
-		livro1.adicionarExemplar(exemplar1);
-		livro1.adicionarExemplar(exemplar2);
-		livro2.adicionarExemplar(exemplar3);
-		livro3.adicionarExemplar(exemplar4);
-		livro4.adicionarExemplar(exemplar5);
-		livro5.adicionarExemplar(exemplar6);
-		livro5.adicionarExemplar(exemplar7);
-		livro7.adicionarExemplar(exemplar8);
-		livro7.adicionarExemplar(exemplar9);
+		livro1.adicionarExemplar("01");
+		livro1.adicionarExemplar("02");
+		livro2.adicionarExemplar("03");
+		livro3.adicionarExemplar("04");
+		livro4.adicionarExemplar("05");
+		livro5.adicionarExemplar("06");
+		livro5.adicionarExemplar("07");
+		livro7.adicionarExemplar("08");
+		livro7.adicionarExemplar("09");
 		
 		this.adicionarLivro(livro1);
 		this.adicionarLivro(livro2);
