@@ -12,9 +12,10 @@ public class ComandoConsultaNotificacao implements Comando{
 		Usuario usuario = repositorio.buscaUsuarioPorCodigo(codigoUsuario);
 
 		if (usuario == null) {
-			System.out.println("Usuário não encontrado.");
+			System.out.println("FALHA: usuário não encontrado.");
 			return;
 		}
+		
 		Observador aux = (Observador) usuario;
 		System.out.println("Usuário " + usuario.getNome() + " recebeu " + aux.getQtdNotificacoes() + " notificações.");
 		
