@@ -27,4 +27,8 @@ public class Exemplar {
 		return codigoExemplar;
 	}
 	
+	public String getTituloExemplar() {
+		return this.livroBase.getTitulo();
+	}
+	
 }
