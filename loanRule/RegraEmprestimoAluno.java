@@ -1,5 +1,8 @@
 package loanRule;
 import book.Livro;
+
+// atualização mensagens de falha
+
 import user.Aluno;
 import user.Usuario;
 
@@ -21,14 +24,11 @@ public class RegraEmprestimoAluno extends RegraEmprestimo {
 	public boolean haExemplarDisponivel(Usuario usuario, Livro livro) {
 		
 		if (livro.getQtdExemplaresDisponiveis() > 0) {
-			
 			if (livro.getQtdReservasFeitas() >= livro.getQtdExemplaresDisponiveis()) {
-				if (livro.buscaReservaDeUsuario(usuario)!= null) {
-					
+				if (livro.buscaReservaDeUsuario(usuario) != null)
 					return true;
-				}
 				
-				System.out.println("Motivo: há exemplares disponíveis apenas para quem fez reserva.");
+				System.out.println("FALHA: há exemplares disponíveis apenas para quem fez reserva.");
 				
 				return false;
 			}
@@ -36,7 +36,7 @@ public class RegraEmprestimoAluno extends RegraEmprestimo {
 			return true;
 		}
 		
-		System.out.println("Motivo: não há exemplares disponíveis para empréstimo");
+		System.out.println("FALHA: não há exemplares disponíveis para empréstimo.");
 		
 		return false;
 	}
@@ -49,7 +49,7 @@ public class RegraEmprestimoAluno extends RegraEmprestimo {
 	public boolean verificarLimiteDeLivros(Usuario usuario) {
 		Aluno aluno = (Aluno)usuario;
 		if (usuario.getQtdLivrosEmprestados() == aluno.getMaxLivrosEmprestimo()) {
-			System.out.printf("Motivo: limite de empréstimo atingido");
+			System.out.printf("FALHA: limite de empréstimo atingido.\n");
 			return false;
 		}
 				
