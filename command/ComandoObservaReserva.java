@@ -1,3 +1,5 @@
+// Tudo OK
+
 package command;
 
 import book.Livro;
@@ -16,15 +18,16 @@ public class ComandoObservaReserva implements Comando {
           Livro livro = repositorio.buscaLivroPorCodigo(codigoLivro);
 
           if (usuario == null) {
-              System.out.println("Usuário não encontrado.");
+              System.out.println("FALHA: usuário não encontrado.");
               return;
           }
           if (livro == null) {
-              System.out.println("Livro não encontrado.");
+              System.out.println("FALHA: livro não encontrado.");
               return;
           }         
+          
           livro.adicionaObservador((Observador) usuario);
-          System.out.println("Observador adicionado com sucesso para o usuário: " + usuario.getNome() + " e o livro: " + livro.getTitulo());
+          System.out.printf("SUCESSO: o usuário %s foi cadastrado como observador do livro %s.\n", usuario.getNome(), livro.getTitulo());
   
     }
 }
