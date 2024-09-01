@@ -1,5 +1,5 @@
 package loanRule;
-
+// adição de mensagem de falha
 import book.Livro;
 import user.Usuario;
 
@@ -15,16 +15,20 @@ public abstract class RegraEmprestimo {
 	}
 	
 	public boolean usuarioEmDebito(Usuario usuario) {
-		return usuario.usuarioEmDebito();
+		if (usuario.usuarioEmDebito()) {
+			System.out.println("FALHA: o usuário está com livros em débito.");
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public boolean haEmprestimoEmCurso(Usuario usuario, Livro livro) {
-		if (livro.buscaEmprestimoDeUsuario(usuario)!= null) {
-			
+		if (livro.buscaEmprestimoDeUsuario(usuario) != null) {
+			System.out.println("FALHA: o usuário já possui empréstimo deste livro em curso.");
 			return true;
-		}else {
-			return false;
 		}
-	
+		
+		return false;
 	}
 }
