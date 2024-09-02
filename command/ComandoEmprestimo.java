@@ -1,14 +1,8 @@
 package command;
 
-import book.Exemplar;
 import book.Livro;
-import loan.Emprestimo;
 import loanRule.RegraEmprestimo;
-import loanRule.RegraEmprestimoAluno;
-import loanRule.RegraEmprestimoProfessor;
 import repository.Repositorio;
-import user.Aluno;
-import user.Professor;
 import user.Usuario;
 
 public class ComandoEmprestimo implements Comando {
@@ -22,25 +16,24 @@ public class ComandoEmprestimo implements Comando {
         Livro livro = repositorio.buscaLivroPorCodigo(codigoLivro);
 
         if (usuario == null) {
-            System.out.println("Usuário não encontrado.");
+            System.out.println("FALHA: usuário não encontrado.");
             return;
         }
+        
         if (livro == null) {
-            System.out.println("Livro não encontrado.");
+            System.out.println("FALHA: livro não encontrado.");
             return;
         }
 
         RegraEmprestimo regraEmprestimo = usuario.getRegraEmprestimo();
-        Exemplar exemplar = regraEmprestimo.verificarCondicoesEmprestimo(usuario, livro);
-        if (exemplar == null) {
-        	System.out.println("Empréstimo não pode ser realizado devido às condições de empréstimo.");
-            
-        }else {
-        	 Emprestimo emprestimo = new Emprestimo(usuario, exemplar);
-             usuario.adicionarEmprestimo(emprestimo);
-             System.out.println("Empréstimo realizado com sucesso para o usuário: " + usuario.getNome() + " com o livro: " + livro.getTitulo());
+        
+        if (!regraEmprestimo.verificarCondicoesEmprestimo(usuario, livro)) {
+        	System.out.printf("FALHA: empréstimo do livro %s não pode ser realizado para o usuário %s.\n", livro.getTitulo(), usuario.getNome());
+        	return;
         }
-       
+        
+        livro.adicionaEmprestimo(usuario);
+        System.out.printf("SUCESSO: empréstimo do livro %s realizado para o usuário %s.\n",livro.getTitulo(), usuario.getNome());
     }
 }
 

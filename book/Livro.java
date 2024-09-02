@@ -2,7 +2,6 @@ package book;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import loan.Emprestimo;
 import loan.Reserva;
 import user.Observador;
@@ -48,6 +47,8 @@ public class Livro implements Assunto{
         Exemplar exemplar = obterExemplarDisponivel();
         if (exemplar != null) {
             Emprestimo emprestimo = new Emprestimo(usuario, exemplar);
+            usuario.adicionarEmprestimo(emprestimo);
+            this.removeReserva(usuario);
             emprestimos.add(emprestimo);
             exemplar.obterExemplar();
         }
@@ -66,22 +67,18 @@ public class Livro implements Assunto{
         if(reservaParaRemover != null) {
         	reservaParaRemover.desfazerReserva();
         	reservas.remove(reservaParaRemover);
-            System.out.println("Reserva removida para o usuário: " + usuario.getNome());
-        }else {
-            System.out.println("Nenhuma reserva encontrada para o usuário: " + usuario.getNome());
-        }          
+        }     
     }
     
-    public void removeEmprestimo(Usuario usuario) {
+    public boolean removeEmprestimo(Usuario usuario) {
         Emprestimo emprestimoParaRemover = buscaEmprestimoDeUsuario(usuario);
         if(emprestimoParaRemover != null) {
         	emprestimoParaRemover.desfazerEmprestimo();
         	emprestimos.remove(emprestimoParaRemover);
-            System.out.println("Empréstimo removido para o usuário: " + usuario.getNome());
-
-        }else {
-            System.out.println("Nenhum empréstimo encontrado para o usuário: " + usuario.getNome());
-        }          
+        	return true;
+        }
+        
+        return false;
     }
 
     public Reserva buscaReservaDeUsuario(Usuario usuario) {
@@ -105,13 +102,13 @@ public class Livro implements Assunto{
     public boolean comparaCodigoIdentificacao(String codigo) {
         return this.codigoLivro.equals(codigo);
     }
-
-    public void adicionarExemplar(Exemplar exemplar) { 	
-        exemplares.add(exemplar);
+    
+    public void adicionarExemplar(String codigoExemplar) { 	
+        exemplares.add(new Exemplar(codigoExemplar, this));
     }
-
+    
     public int getQtdExemplaresDisponiveis() {
-        return exemplares.size();
+        return (this.exemplares.size() - this.emprestimos.size());
     }
 
     public int getQtdReservasFeitas() {
@@ -141,7 +138,7 @@ public class Livro implements Assunto{
         if (qtdReservas > 0) {
             System.out.println("Usuários que fizeram reserva:");
             for (Reserva reserva : this.reservas) {
-                System.out.println("- " + reserva.getUsuario().getNome());
+                System.out.printf("- %s", reserva.exibeInformacoesParaLivro());
             }
         }
 
@@ -152,9 +149,7 @@ public class Livro implements Assunto{
                 System.out.println("Status: Emprestado");
                 
                 Emprestimo emprestimo = buscaEmprestimoPorExemplar(exemplar);
-                System.out.printf("Nome do usuário que realizou o empréstimo: %s\n", emprestimo.getUsuario().getNome());
-                System.out.printf("Data de empréstimo: %s\n", emprestimo.getDataEmprestimo().toString());
-                System.out.printf("Data prevista de devolução: %s\n", emprestimo.getDataDevolucao().toString());
+                System.out.printf("%s\n", emprestimo.exibeInformacoesParaLivro());
             } else {
                 System.out.println("Status: Disponível");
             }

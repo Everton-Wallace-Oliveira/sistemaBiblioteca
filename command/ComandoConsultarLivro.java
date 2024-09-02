@@ -9,6 +9,12 @@ public class ComandoConsultarLivro implements Comando {
 		String codigoLivro = parametros.getCodigoUm();
 		Repositorio repositorio = Repositorio.getInstancia();
 		Livro livro = repositorio.buscaLivroPorCodigo(codigoLivro);
+		
+		if (livro == null) {
+            System.out.println("FALHA: livro não encontrado.");
+            return;
+        }
+		
 		livro.exibeInformacoes();
 	}
 

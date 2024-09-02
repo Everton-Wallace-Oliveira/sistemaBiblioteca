@@ -1,5 +1,8 @@
 package loanRule;
 import book.Livro;
+
+// atualização mensagens de falha
+
 import user.Usuario;
 
 public class RegraEmprestimoProfessor extends RegraEmprestimo {
@@ -21,7 +24,7 @@ public class RegraEmprestimoProfessor extends RegraEmprestimo {
 		if (livro.getQtdExemplaresDisponiveis() > 0) 
 			return true;
 		
-		System.out.println("Motivo: não há exemplares disponíveis para empréstimo");
+		System.out.println("FALHA: não há exemplares disponíveis para empréstimo.");
 		
 		return false;
 	}

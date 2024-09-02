@@ -1,5 +1,7 @@
 package user;
 import java.util.ArrayList;
+
+// adição método pegar qtd reserva
 import java.util.List;
 
 import loan.Emprestimo;
@@ -34,10 +36,13 @@ public abstract class Usuario {
 		return this.emprestimosCorrentes.size();
 	}
 	
+	public int getQtdReservasFeitas() {
+		return this.reservas.size();
+	}
+	
 	public boolean usuarioEmDebito() {
 		for (Emprestimo emprestimo: this.emprestimosCorrentes) {
 			if (emprestimo.estaEmAtraso())
-				System.out.println("Motivo: o(a) usuário(a) está com livros em débito.");
 				return true;
 		}
 		
@@ -45,21 +50,32 @@ public abstract class Usuario {
 	}
 	
 	public void exibeInformacoes() {
-		System.out.printf("Exibindo informações do usuário %s:\n", this.codigoIdentificacao);
-		System.out.println("EMPRÉSTIMOS");
-		
-		for (Emprestimo emprestimo: this.emprestimosCorrentes) {
-			System.out.printf("%s - em curso\n", emprestimo.toString());
+		System.out.printf("Exibindo informações do usuário %s:\n", this.nome);
+		if (this.emprestimosCorrentes.size() > 0 || this.emprestimosPassados.size() > 0) {
+			System.out.println("EMPRÉSTIMOS\n");
+			
+			for (Emprestimo emprestimo: this.emprestimosCorrentes) {
+				System.out.printf("%sStatus: em curso\n\n", emprestimo.exibeInformacoesParaUsuario());
+			}
+			
+			
+			for (Emprestimo emprestimo: this.emprestimosPassados) {
+				System.out.printf("%sStatus: finalizado\n", emprestimo.exibeInformacoesParaUsuario());
+			}
+		}
+		else {
+			System.out.println("O usuário ainda não realizou empréstimos.");
 		}
 		
-		for (Emprestimo emprestimo: this.emprestimosPassados) {
-			System.out.printf("%s - finalizado\n", emprestimo.toString());
+		if (this.reservas.size() > 0) {
+			System.out.println("\nRESERVAS\n");
+			
+			for (Reserva reserva: this.reservas) {
+				System.out.printf("%s\n", reserva.exibeInformacoesParaUsuario());
+			}
 		}
-		
-		System.out.println("RESERVAS");
-		
-		for (Reserva reserva: this.reservas) {
-			System.out.printf("%s\n", reserva.toString());
+		else {
+			System.out.println("O usuário ainda não realizou reservas.");
 		}
 	}
 	

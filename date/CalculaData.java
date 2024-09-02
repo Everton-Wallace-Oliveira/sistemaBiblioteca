@@ -1,3 +1,5 @@
+// TUDO OK
+
 package date;
 
 import java.util.Calendar;
@@ -16,5 +18,9 @@ public class CalculaData {
 		calendar.add(Calendar.DATE, limiteDiasEmprestimo);
        return calendar;
     }
+	
+	public static String geraDataFormatada(Calendar data) {
+		return String.format("%02d/%02d/%04d", data.get(Calendar.DATE), data.get(Calendar.MONTH) + 1, data.get(Calendar.YEAR)) ;
+	}
 
 }
